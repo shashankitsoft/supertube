@@ -1,0 +1,32 @@
+.channel-detail {
+    padding: 20px;
+    background: #141414;
+    color: #fff;
+  }
+  
+  .video-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .video-card {
+    width: 200px;
+    text-align: center;
+  }
+  
+  .video-card img {
+    width: 100%;
+    border-radius: 10px;
+    transition: transform 0.2s;
+  }
+  
+  .video-card img:hover {
+    transform: scale(1.05);
+  }
+  
+  .video-card p {
+    font-size: 0.9rem;
+    margin-top: 5px;
+    color: #ccc;
+  }

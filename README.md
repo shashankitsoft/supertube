@@ -17,6 +17,7 @@ Organize your youtube channel subscriptions
 
 **Create build**
 `ionic build`
+`ionic build --watch`
 
 **Run build preview on local:** http://localhost:4173/
 `pnpm preview`
@@ -29,3 +30,17 @@ Organize your youtube channel subscriptions
 - It will give a https url in terminal which can be used to run the dev app with https (which is must to make PWA installable) 
 
 
+###Check for PWA Eligibility in Chrome:
+1. a) Open DevTools (F12 > Application Tab > Service Workers).
+Check if the service worker is active and controlling the app.
+b) Open DevTools (F12 > Application Tab > Manifest).
+Look for a section saying "Installability".
+If the app isn’t installable, it will show why (e.g., "No service worker detected").
+Use Lighthouse to Audit Your PWA:
+
+2. Open DevTools (F12 > Lighthouse Tab).
+Run a PWA audit to get detailed feedback on missing or incorrect configurations.
+
+
+### Ref: 
+https://ionicframework.com/docs/react/pwa
