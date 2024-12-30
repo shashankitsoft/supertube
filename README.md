@@ -9,7 +9,10 @@ Organize your youtube channel subscriptions
 **Install packages:**
 `pnpm i`
 
-**Run on local** http://localhost:5173/
+**Start a local dev server for app dev/testing:** http://localhost:8100/
+`ionic serve`
+
+**Run on local:** http://localhost:5173/
 `pnpm dev`
 
 **Create build**
