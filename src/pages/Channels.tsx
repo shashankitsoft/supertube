@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   IonAvatar,
   IonContent,
@@ -9,39 +9,44 @@ import {
   IonModal
 } from "@ionic/react";
 import "./Home.css";
-import { type Channel } from "../types";
-import { channelData } from "../data/channelData";
+import {type Channel, type ChannelData} from '../types';
+
 
 const getYouTubeLogoURL = (channelId: string) =>
   `https://yt3.googleusercontent.com/${channelId}`;
 
-
-
 const Channels: React.FC = () => {
-    const [modalOpen, setModalOpen] = useState(false);
-    const [selectedChannel, setSelectedChannel] = useState<Channel | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedChannel, setSelectedChannel] = useState<Channel | null>(null);
+  const [channelData, setChannelData] = useState<ChannelData[]>([]);
 
-    const handleChannelClick = (channel: Channel) => {
-      setSelectedChannel(channel);
-      setModalOpen(true);
-    };
+  useEffect(() => {
+    fetch('/channels.json')
+      .then(res => res.json())
+      .then(setChannelData);
+  }, []);
 
-    const handleModalAction = (type: 'live' | 'videos') => {
-      if (!selectedChannel) return;
-      const url = `https://www.youtube.com/${selectedChannel.handle}/${type === 'live' ? 'streams' : 'videos'}`;
-      window.open(url, '_blank');
+  const handleChannelClick = (channel: Channel) => {
+    setSelectedChannel(channel);
+    setModalOpen(true);
+  };
+
+  const handleModalAction = (type: 'live' | 'videos') => {
+    if (!selectedChannel) return;
+    const url = `https://www.youtube.com/${selectedChannel.handle}/${type === 'live' ? 'streams' : 'videos'}`;
+    window.open(url, '_blank');
+    setModalOpen(false);
+  };
+
+  const handleModalKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'ArrowLeft') {
+      (document.getElementById('modal-live-btn') as HTMLElement)?.focus();
+    } else if (e.key === 'ArrowRight') {
+      (document.getElementById('modal-videos-btn') as HTMLElement)?.focus();
+    } else if (e.key === 'Escape') {
       setModalOpen(false);
-    };
-
-    const handleModalKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-      if (e.key === 'ArrowLeft') {
-        (document.getElementById('modal-live-btn') as HTMLElement)?.focus();
-      } else if (e.key === 'ArrowRight') {
-        (document.getElementById('modal-videos-btn') as HTMLElement)?.focus();
-      } else if (e.key === 'Escape') {
-        setModalOpen(false);
-      }
-    };
+    }
+  };
 
   return (
     <IonPage>
@@ -60,7 +65,7 @@ const Channels: React.FC = () => {
           <div key={index} className="category">
             <h2 className="category-title">{category.category}</h2>
             <div className="channel-list">
-              {category.channels.map((channel: Channel, idx: number) => (
+              {category.channels.map((channel, idx) => (
                 <div
                   key={idx}
                   className="channel-card"
@@ -69,6 +74,7 @@ const Channels: React.FC = () => {
                   onKeyDown={e => { if (e.key === 'Enter') handleChannelClick(channel); }}
                 >
                   <IonAvatar className="channel-logo-container">
+                    {/* You may want to fetch and display the logo using another field or a helper */}
                     <img
                       src={getYouTubeLogoURL(channel.key)}
                       alt={`${channel.name} logo`}

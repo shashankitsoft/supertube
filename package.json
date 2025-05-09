@@ -11,7 +11,8 @@
     "test.unit": "vitest",
     "lint": "eslint",
     "deploy": "gh-pages -d dist",
-    "clean": "rimraf node_modules dist package-lock.json pnpm-lock.yaml"
+    "clean": "rimraf node_modules dist package-lock.json pnpm-lock.yaml",
+    "fetch-youtube": "npx dotenvx run -- node fetch-youtube.js"
   },
   "dependencies": {
     "@capacitor/app": "7.0.1",
@@ -21,6 +22,7 @@
     "@capacitor/status-bar": "7.0.1",
     "@ionic/react": "^8.5.7",
     "@ionic/react-router": "^8.5.7",
+    "axios": "^1.9.0",
     "ionicons": "^8.0.8",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
@@ -29,6 +31,7 @@
   },
   "devDependencies": {
     "@capacitor/cli": "7.2.0",
+    "@dotenvx/dotenvx": "^1.43.0",
     "@eslint/js": "^9.26.0",
     "@testing-library/dom": ">=10.4.0",
     "@testing-library/jest-dom": "^6.6.3",

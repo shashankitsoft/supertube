@@ -1,0 +1,58 @@
+[
+  {
+    "category": "News",
+    "name": "The Red Mike",
+    "handle": "@TheRedMike.",
+    "channelId": "UCW9A1mvMHxVrGViwx4WCbcQ",
+    "latestVideo": "https://www.youtube.com/watch?v=xd_ZUyfXXps",
+    "liveVideo": null
+  },
+  {
+    "category": "News",
+    "name": "BBC News",
+    "handle": "@BBCNews",
+    "channelId": "UC16niRr50-MSBwiO3YDb3RA",
+    "latestVideo": "https://www.youtube.com/watch?v=YaOcHVtQbRA",
+    "liveVideo": null
+  },
+  {
+    "category": "News",
+    "name": "BBC Hindi",
+    "handle": "@BBCHindi",
+    "channelId": "UCN7B-QD0Qgn2boVH5Q0pOWg",
+    "latestVideo": "https://www.youtube.com/watch?v=V3ku1Blim0s",
+    "liveVideo": null
+  },
+  {
+    "category": "News",
+    "name": "The Deshbhakt",
+    "handle": "@thedeshbhakt",
+    "channelId": "UCmTM_hPCeckqN3cPWtYZZcg",
+    "latestVideo": "https://www.youtube.com/watch?v=Ip9XfNHojiE",
+    "liveVideo": null
+  },
+  {
+    "category": "News",
+    "name": "Ravish Kumar Official",
+    "handle": "@ravishkumar.official",
+    "channelId": "UC0yXUUIaPVAqZLgRjvtMftw",
+    "latestVideo": "https://www.youtube.com/watch?v=P-cZmqjr0HE",
+    "liveVideo": null
+  },
+  {
+    "category": "Technology",
+    "name": "Marques Brownlee",
+    "handle": "@LaravelDaily",
+    "channelId": "UCTuplgOBi6tJIlesIboymGA",
+    "latestVideo": "https://www.youtube.com/watch?v=QkJ6mpmq8Os",
+    "liveVideo": null
+  },
+  {
+    "category": "Technology",
+    "name": "Linus Tech Tips",
+    "handle": "@LinusTechTips",
+    "channelId": "UCXuqSBlHAE6Xw-yeJA0Tunw",
+    "latestVideo": "https://www.youtube.com/watch?v=SChh6MnYzjU",
+    "liveVideo": null
+  }
+]
