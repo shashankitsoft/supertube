@@ -38,11 +38,11 @@ const Home: React.FC = () => {
                 <div
                   key={idx}
                   className="channel-card"
-                  onClick={() => window.open(channel.url, "_blank")}
+                  onClick={() => window.open(channel.handle, "_blank")}
                 >
                   <IonAvatar className="channel-logo-container">
                     <img
-                      src={getYouTubeLogoURL(channel.id)}
+                      src={getYouTubeLogoURL(channel.key)}
                       alt={`${channel.name} logo`}
                       className="channel-logo"
                     />
