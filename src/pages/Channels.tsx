@@ -8,6 +8,7 @@ import {
   IonModal
 } from "@ionic/react";
 import {type Channel, type ChannelData} from '../types';
+import { BASE_PATH } from "../constants";
 import "./Channels.css";
 
 
@@ -20,7 +21,7 @@ const Channels: React.FC = () => {
   const [channelData, setChannelData] = useState<ChannelData[]>([]);
 
   useEffect(() => {
-    fetch(`${import.meta.env.BASE_URL}channels.json`)
+    fetch(`${BASE_PATH}channels.json`)
       .then(res => res.json())
       .then(setChannelData);
   }, []);

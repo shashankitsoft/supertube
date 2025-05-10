@@ -14,6 +14,7 @@ import { logoYoutube, newspaper, videocam } from 'ionicons/icons';
 import News from './pages/News';
 import Channels from './pages/Channels';
 import Videos from './pages/Videos';
+import { BASE_PATH } from './constants';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -51,7 +52,7 @@ setupIonicReact();
 
 const App: React.FC = () => (
   <IonApp>
-    <IonReactRouter basename="/supertube">
+    <IonReactRouter basename={BASE_PATH}>
       <IonTabs>
         <IonRouterOutlet>
           <Route exact path="/channels">
@@ -68,15 +69,15 @@ const App: React.FC = () => (
           </Route>
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
-          <IonTabButton tab="channels" href="/channels">
+          <IonTabButton tab="channels" href={`${BASE_PATH}channels`}>
             <IonIcon aria-hidden="true" icon={logoYoutube} />
             <IonLabel>Channels</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="news" href="/news">
+          <IonTabButton tab="news" href={`${BASE_PATH}news`}>
             <IonIcon aria-hidden="true" icon={newspaper} />
             <IonLabel>News</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="videos" href="/videos">
+          <IonTabButton tab="videos" href={`${BASE_PATH}videos`}>
             <IonIcon aria-hidden="true" icon={videocam} />
             <IonLabel>Videos</IonLabel>
           </IonTabButton>
