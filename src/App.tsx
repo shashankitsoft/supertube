@@ -11,9 +11,9 @@ import {
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { ellipse, square, triangle } from 'ionicons/icons';
-import Home from './pages/Home';
+import News from './pages/News';
 import Channels from './pages/Channels';
-import Tab3 from './pages/Tab3';
+import Videos from './pages/Videos';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -53,31 +53,32 @@ const App: React.FC = () => (
     <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
-          <Route exact path="/home">
-            <Home />
-          </Route>
           <Route exact path="/channels">
             <Channels />
           </Route>
-          <Route path="/tab3">
-            <Tab3 />
+          <Route exact path="/news">
+            <News />
+          </Route>
+          <Route exact path="/videos">
+            <Videos />
           </Route>
           <Route exact path="/">
-            <Redirect to="/tab1" />
+            <Redirect to="/channels" />
           </Route>
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
-          <IonTabButton tab="home" href="/home">
-            <IonIcon aria-hidden="true" icon={triangle} />
-            <IonLabel>Home</IonLabel>
-          </IonTabButton>
           <IonTabButton tab="channels" href="/channels">
             <IonIcon aria-hidden="true" icon={ellipse} />
             <IonLabel>Channels</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="tab3" href="/tab3">
+          <IonTabButton tab="news" href="/news">
+            <IonIcon aria-hidden="true" icon={triangle} />
+            <IonLabel>News</IonLabel>
+          </IonTabButton>
+          
+          <IonTabButton tab="videos" href="/videos">
             <IonIcon aria-hidden="true" icon={square} />
-            <IonLabel>Tab 3</IonLabel>
+            <IonLabel>Videos</IonLabel>
           </IonTabButton>
         </IonTabBar>
       </IonTabs>

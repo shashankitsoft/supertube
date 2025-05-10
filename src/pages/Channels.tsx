@@ -8,7 +8,7 @@ import {
   IonToolbar,
   IonModal
 } from "@ionic/react";
-import "./Home.css";
+import "./News.css";
 import {type Channel, type ChannelData} from '../types';
 
 
@@ -64,24 +64,23 @@ const Channels: React.FC = () => {
         {channelData.map((category, index) => (
           <div key={index} className="category">
             <h2 className="category-title">{category.category}</h2>
-            <div className="channel-list">
+            <div className="channel-grid">
               {category.channels.map((channel, idx) => (
                 <div
                   key={idx}
-                  className="channel-card"
+                  className="channel-square-card focusable"
                   tabIndex={0}
                   onClick={() => handleChannelClick(channel)}
                   onKeyDown={e => { if (e.key === 'Enter') handleChannelClick(channel); }}
                 >
-                  <IonAvatar className="channel-logo-container">
-                    {/* You may want to fetch and display the logo using another field or a helper */}
+                  <div className="channel-logo-name">
                     <img
                       src={getYouTubeLogoURL(channel.key)}
                       alt={`${channel.name} logo`}
                       className="channel-logo"
                     />
-                  </IonAvatar>
-                  <p className="channel-name">{channel.name}</p>
+                    <div className="channel-title">{channel.name}</div>
+                  </div>
                 </div>
               ))}
             </div>
