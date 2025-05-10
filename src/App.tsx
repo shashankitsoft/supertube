@@ -68,16 +68,24 @@ const App: React.FC = () => (
             <Redirect to="/channels" />
           </Route>
         </IonRouterOutlet>
+        {/*
+          Note for maintainers:
+          The tab hrefs below are root-relative (e.g. "/channels").
+          React Router's basename (set above) will prepend the correct subpath (e.g. "/supertube/") at navigation time (bcoz of vite-config for github page).
+          This means the browser status bar on hover will show the root-relative path (e.g. "/channels"),
+          but the actual navigation will go to the correct subpath (e.g. "/supertube/channels").
+          This is a known limitation of React Router's basename handling and is standard for subpath deployments.
+        */}
         <IonTabBar slot="bottom">
-          <IonTabButton tab="channels" href={`${BASE_PATH}channels`}>
+          <IonTabButton tab="channels" href="/channels">
             <IonIcon aria-hidden="true" icon={logoYoutube} />
             <IonLabel>Channels</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="news" href={`${BASE_PATH}news`}>
+          <IonTabButton tab="news" href="/news">
             <IonIcon aria-hidden="true" icon={newspaper} />
             <IonLabel>News</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="videos" href={`${BASE_PATH}videos`}>
+          <IonTabButton tab="videos" href="/videos">
             <IonIcon aria-hidden="true" icon={videocam} />
             <IonLabel>Videos</IonLabel>
           </IonTabButton>
