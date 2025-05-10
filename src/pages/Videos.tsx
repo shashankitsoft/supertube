@@ -6,25 +6,9 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import "./News.css";
-
-interface VideoInfo {
-  id: string;
-  url: string;
-  title: string;
-  description: string;
-  publishedAt: string;
-  thumbnail: string | null;
-}
-
-interface VideoEntry {
-  category: string;
-  name: string;
-  latestVideo: VideoInfo | null;
-  liveVideo: VideoInfo | null;
-  handle?: string;
-  channelId?: string;
-}
+import { VideoEntry } from "../types";
+import VideoThumbnailCard from "../components/VideoThumbnailCard";
+import "../components/VideoThumbnailCard.css";
 
 const Videos: React.FC = () => {
   const [videos, setVideos] = useState<VideoEntry[]>([]);
@@ -65,35 +49,16 @@ const Videos: React.FC = () => {
             <div className="channel-list">
               {entries.map((entry, idx) =>
                 entry.latestVideo ? (
-                  <div
+                  <VideoThumbnailCard
                     key={idx}
-                    className="channel-card-rect focusable"
-                    tabIndex={0}
-                  >
-                    <img
-                      className="video-thumb"
-                      src={
-                        entry.latestVideo.thumbnail ||
-                        "https://via.placeholder.com/150"
-                      }
-                      alt={entry.latestVideo.title + " thumbnail"}
-                    />
-                    <div className="video-info">
-                      <div className="video-title">{entry.latestVideo.title}</div>
-                      <div className="video-meta">
-                        <span className="channel-name">{entry.name}</span>
-                        <span className="video-time">
-                          {new Date(entry.latestVideo.publishedAt).toLocaleString()}
-                        </span>
-                      </div>
-                      <div className="video-desc">
-                        {entry.latestVideo.description}
-                      </div>
-                    </div>
-                    <div className="video-embed placeholder">
-                      Open on YouTube
-                    </div>
-                  </div>
+                    video={entry.latestVideo}
+                    channelName={entry.name}
+                    onClick={() => window.open(entry.latestVideo!.url, "_blank")}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ")
+                        window.open(entry.latestVideo!.url, "_blank");
+                    }}
+                  />
                 ) : null
               )}
             </div>

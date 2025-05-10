@@ -1,52 +1,17 @@
 import { useEffect, useState, useRef } from "react";
-import {
-  IonContent,
-  IonHeader,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-  IonModal,
-  IonButton,
-} from "@ionic/react";
-import "./News.css";
-
-interface YTPlayer {
-  destroy: () => void;
-}
-
-interface YTPlayerOptions {
-  height: string;
-  width: string;
-  videoId: string;
-  playerVars: { autoplay: number };
-}
-interface YTPlayerConstructor {
-  new (container: HTMLElement, options: YTPlayerOptions): YTPlayer;
-}
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from "@ionic/react";
+import NewsSection from "../components/NewsSection";
+import VideoModal from "../components/VideoModal";
+import { VideoEntry, YTPlayer, YTPlayerConstructor } from "../types";
+import "../components/VideoThumbnailCard.css";
+import "../components/VideoModal.css";
+import "../components/NewsSection.css";
 
 declare global {
   interface Window {
     onYouTubeIframeAPIReady?: () => void;
     YT?: unknown;
   }
-}
-
-interface VideoInfo {
-  id: string;
-  url: string;
-  title: string;
-  description: string;
-  publishedAt: string;
-  thumbnail: string | null;
-}
-
-interface VideoEntry {
-  category: string;
-  name: string;
-  latestVideo: VideoInfo | null;
-  liveVideo: VideoInfo | null;
-  handle?: string;
-  channelId?: string;
 }
 
 const loadYouTubeAPI = (() => {
@@ -64,15 +29,11 @@ const loadYouTubeAPI = (() => {
 })();
 
 const News: React.FC = () => {
-
   const [videos, setVideos] = useState<VideoEntry[]>([]);
   const [modalOpen, setModalOpen] = useState(false);
-  const [selectedVideo, setSelectedVideo] = useState<{
-    url: string;
-    title: string;
-  } | null>(null);
+  const [selectedVideo, setSelectedVideo] = useState<{ url: string; title: string } | null>(null);
   const playerRef = useRef<YTPlayer | null>(null);
-  const playerContainerRef = useRef<HTMLDivElement>(null);
+  const playerContainerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     fetch("/youtube-data.json")
@@ -140,78 +101,33 @@ const News: React.FC = () => {
             <IonTitle size="large">News</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <div className="news-section">
-          <h2 className="section-title">Live</h2>
-          <div className="channel-list">
-            {liveNews.map((entry, idx) => (
-              entry.liveVideo && (
-                <div
-                  key={idx}
-                  className="channel-card-rect focusable"
-                  tabIndex={0}
-                  onClick={() => {
-                    setSelectedVideo({ url: entry.liveVideo!.url, title: entry.liveVideo!.title });
-                    setModalOpen(true);
-                  }}
-                  onKeyDown={(e) => handleCardKeyDown(e, { url: entry.liveVideo!.url, title: entry.liveVideo!.title })}
-                >
-                  <img className="video-thumb" src={entry.liveVideo.thumbnail || ''} alt={entry.liveVideo.title + ' thumbnail'} />
-                  <div className="video-info">
-                    <div className="video-title">{entry.liveVideo.title}</div>
-                    <div className="video-meta">
-                      <span className="channel-name">{entry.name}</span>
-                      <span className="video-time">{new Date(entry.liveVideo.publishedAt).toLocaleString()}</span>
-                    </div>
-                    <div className="video-desc">{entry.liveVideo.description}</div>
-                  </div>
-                  <div className="video-embed placeholder">Press OK/Enter to play</div>
-                </div>
-              )
-            ))}
-          </div>
-        </div>
-        <div className="news-section">
-          <h2 className="section-title">Latest</h2>
-          <div className="channel-list">
-            {latestNews.map((entry, idx) => (
-              entry.latestVideo && (
-                <div
-                  key={idx}
-                  className="channel-card-rect focusable"
-                  tabIndex={0}
-                  onClick={() => {
-                    setSelectedVideo({ url: entry.latestVideo!.url, title: entry.latestVideo!.title });
-                    setModalOpen(true);
-                  }}
-                  onKeyDown={(e) => handleCardKeyDown(e, { url: entry.latestVideo!.url, title: entry.latestVideo!.title })}
-                >
-                  <img className="video-thumb" src={entry.latestVideo.thumbnail || ''} alt={entry.latestVideo.title + ' thumbnail'} />
-                  <div className="video-info">
-                    <div className="video-title">{entry.latestVideo.title}</div>
-                    <div className="video-meta">
-                      <span className="channel-name">{entry.name}</span>
-                      <span className="video-time">{new Date(entry.latestVideo.publishedAt).toLocaleString()}</span>
-                    </div>
-                    <div className="video-desc">{entry.latestVideo.description}</div>
-                  </div>
-                  <div className="video-embed placeholder">Press OK/Enter to play</div>
-                </div>
-              )
-            ))}
-          </div>
-        </div>
-        <IonModal isOpen={modalOpen} onDidDismiss={() => setModalOpen(false)}>
-          <div
-            className="modal-content"
-            tabIndex={0}
-            onKeyDown={handleModalKeyDown}
-          >
-            <h2>{selectedVideo?.title}</h2>
-            <div ref={playerContainerRef} id="yt-player-container" className="yt-player-container" />
-            <IonButton onClick={() => setModalOpen(false)} className="close-btn">Close</IonButton>
-            <div className="yt-controls-hint">Use YouTube controls for play/pause/fullscreen</div>
-          </div>
-        </IonModal>
+        <NewsSection
+          title="Live"
+          videos={liveNews}
+          isLive={true}
+          onCardSelect={(video) => {
+            setSelectedVideo(video);
+            setModalOpen(true);
+          }}
+          onCardKeyDown={handleCardKeyDown}
+        />
+        <NewsSection
+          title="Latest"
+          videos={latestNews}
+          isLive={false}
+          onCardSelect={(video) => {
+            setSelectedVideo(video);
+            setModalOpen(true);
+          }}
+          onCardKeyDown={handleCardKeyDown}
+        />
+        <VideoModal
+          isOpen={modalOpen}
+          onDidDismiss={() => setModalOpen(false)}
+          selectedVideo={selectedVideo}
+          playerContainerRef={playerContainerRef as React.RefObject<HTMLDivElement>}
+          handleModalKeyDown={handleModalKeyDown}
+        />
       </IonContent>
     </IonPage>
   );

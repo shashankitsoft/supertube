@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import {
-  IonAvatar,
   IonContent,
   IonHeader,
   IonPage,
@@ -8,8 +7,8 @@ import {
   IonToolbar,
   IonModal
 } from "@ionic/react";
-import "./News.css";
 import {type Channel, type ChannelData} from '../types';
+import "./Channels.css";
 
 
 const getYouTubeLogoURL = (channelId: string) =>
@@ -64,7 +63,7 @@ const Channels: React.FC = () => {
         {channelData.map((category, index) => (
           <div key={index} className="category">
             <h2 className="category-title">{category.category}</h2>
-            <div className="channel-grid">
+            <div className="channel-list">
               {category.channels.map((channel, idx) => (
                 <div
                   key={idx}

@@ -1,0 +1,22 @@
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background: #181818;
+}
+.yt-player-container {
+  width: 640px;
+  height: 360px;
+  background: #000;
+  margin-bottom: 16px;
+}
+.close-btn {
+  margin-top: 16px;
+}
+.yt-controls-hint {
+  font-size: 14px;
+  margin-top: 8px;
+  color: #888;
+}

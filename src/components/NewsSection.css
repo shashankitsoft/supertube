@@ -1,0 +1,29 @@
+.news-section {
+  margin-bottom: 32px;
+}
+.section-title {
+  color: #222;
+  font-size: 1.3em;
+  font-weight: 700;
+  margin: 16px 0 8px 8px;
+  letter-spacing: 0.01em;
+  text-shadow: none;
+}
+.channel-list {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  gap: 24px;
+  padding: 16px 24px 16px 24px;
+  -ms-overflow-style: none;
+  overflow: -moz-scrollbars-none;
+}
+.channel-list::-webkit-scrollbar {
+  display: none;
+}
+.channel-list > .channel-card-rect:first-child {
+  margin-left: 12px;
+}
+.channel-list > .channel-card-rect:last-child {
+  margin-right: 12px;
+}

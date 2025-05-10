@@ -1,0 +1,333 @@
+/* Optional body style - uncomment if needed
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #141414;
+  color: #ffffff;
+}
+*/
+
+.category {
+  margin-bottom: 20px;
+}
+
+.category-title {
+  font-size: 1.5rem;
+  padding: 10px 20px;
+  margin: 0;
+  text-transform: capitalize;
+}
+
+/* Home page (video cards with thumbnails, rectangular) */
+.channel-list {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  gap: 24px;
+  padding: 16px 24px 16px 24px; /* Add horizontal and vertical padding for zoom effect */
+  -ms-overflow-style: none; /* IE and Edge */
+  overflow: -moz-scrollbars-none; /* Firefox legacy */
+}
+.channel-list::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+/* Rectangular YouTube-style video cards for Home */
+.channel-card-rect {
+  background: #181818;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px #000a;
+  width: 340px;
+  min-width: 340px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+  border: 1.5px solid #222;
+  transition: box-shadow 0.2s, border-color 0.2s, transform 0.18s;
+  cursor: pointer;
+  /* Add margin for zoom breathing room */
+  margin-left: 4px;
+  margin-right: 4px;
+}
+.channel-card-rect:focus, .channel-card-rect:hover {
+  outline: none;
+  border: 2px solid #ff0000;
+  box-shadow: 0 0 0 2px #ff000044, 0 4px 16px #000c;
+  transform: scale(1.07);
+  z-index: 2;
+}
+.video-thumb {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  background: #111;
+}
+.video-info {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 16px 8px 16px;
+  gap: 4px;
+}
+.video-title {
+  font-size: 1.08em;
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 2px;
+  line-height: 1.2;
+}
+.video-meta {
+  font-size: 0.93em;
+  color: #aaa;
+  margin-bottom: 2px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+.channel-name {
+  color: #fff;
+  font-weight: 500;
+}
+.video-time {
+  color: #bbb;
+}
+.video-desc {
+  font-size: 0.97em;
+  color: #bbb;
+  margin-top: 2px;
+  max-height: 2.8em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.video-embed.placeholder {
+  padding: 8px 16px 16px 16px;
+  color: #ff0000;
+  font-size: 1em;
+  text-align: right;
+}
+.news-section {
+  margin-bottom: 32px;
+}
+.section-title {
+  color: #222;
+  font-size: 1.3em;
+  font-weight: 700;
+  margin: 16px 0 8px 8px;
+  letter-spacing: 0.01em;
+  text-shadow: none;
+}
+
+/* Modal content */
+.channel-modal-content {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: center;
+  width: 420px;
+  height: 220px;
+  max-width: 90vw;
+  max-height: 60vh;
+  background: #111;
+  border-radius: 18px;
+  overflow: hidden;
+  margin: auto;
+  padding: 0;
+  box-sizing: border-box;
+  gap: 0;
+  position: relative;
+}
+
+/* Ionic modal styling overrides */
+.ion-modal,
+ion-modal {
+  --width: auto !important;
+  --height: auto !important;
+  --min-width: unset !important;
+  --min-height: unset !important;
+  --max-width: unset !important;
+  --max-height: unset !important;
+  --background: transparent !important;
+  --box-shadow: none !important;
+  --border-radius: 0 !important;
+  --backdrop-opacity: 0.6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ion-modal .modal-wrapper,
+.ion-modal .modal-shadow,
+ion-modal .modal-wrapper {
+  background: transparent !important;
+  box-shadow: none !important;
+  width: auto !important;
+  height: auto !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Modal action buttons */
+.modal-action-btn {
+  flex: 1 1 0%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  color: #fff;
+  font-size: 1.3rem;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-sizing: border-box;
+  position: relative;
+  border-radius: 0;
+}
+
+/* Live and videos background styles */
+.modal-action-btn-live {
+  background: #222;
+  border-top-left-radius: 18px;
+  border-bottom-left-radius: 18px;
+}
+
+.modal-action-btn-videos {
+  background: #333;
+  border-top-right-radius: 18px;
+  border-bottom-right-radius: 18px;
+}
+
+/* Glowing border on hover/focus/active using pseudo-element */
+.modal-action-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 4px solid transparent;
+  border-radius: inherit;
+  pointer-events: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
+  z-index: 1;
+}
+
+.modal-action-btn:hover::before,
+.modal-action-btn:focus-visible::before,
+.modal-action-btn:active::before {
+  border-color: #ff9800;
+}
+
+/* Add these styles for TV/remote-friendly modal and player layout */
+.news-section .channel-card.focusable {
+  outline: none;
+  border: 2px solid transparent;
+  transition: border-color 0.2s;
+}
+.news-section .channel-card.focusable:focus {
+  border-color: #3880ff;
+  box-shadow: 0 0 0 2px #3880ff44;
+}
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background: #181818;
+}
+.yt-player-container {
+  width: 640px;
+  height: 360px;
+  background: #000;
+  margin-bottom: 16px;
+}
+.close-btn {
+  margin-top: 16px;
+}
+.yt-controls-hint {
+  font-size: 14px;
+  margin-top: 8px;
+  color: #888;
+}
+
+/* Channels page (squarish cards) */
+.channel-grid {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  gap: 24px;
+  padding: 16px 24px 16px 24px; /* Add horizontal and vertical padding for zoom effect */
+  -ms-overflow-style: none;
+  overflow: -moz-scrollbars-none;
+}
+.channel-grid::-webkit-scrollbar {
+  display: none;
+}
+.channel-square-card {
+  background: #232323;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px #000a;
+  width: 160px;
+  height: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  border: 1.5px solid #222;
+  transition: box-shadow 0.2s, border-color 0.2s, transform 0.18s;
+  cursor: pointer;
+  /* Add margin for zoom breathing room */
+  margin-left: 4px;
+  margin-right: 4px;
+}
+.channel-square-card:focus, .channel-square-card:hover {
+  outline: none;
+  border: 2px solid #ff0000;
+  box-shadow: 0 0 0 2px #ff000044, 0 4px 16px #000c;
+  transform: scale(1.07);
+  z-index: 2;
+}
+.channel-list > .channel-card-rect:first-child,
+.channel-grid > .channel-square-card:first-child {
+  margin-left: 12px;
+}
+.channel-list > .channel-card-rect:last-child,
+.channel-grid > .channel-square-card:last-child {
+  margin-right: 12px;
+}
+.channel-logo-name {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.channel-logo {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #111;
+  margin-bottom: 10px;
+}
+.channel-title {
+  color: #fff;
+  font-size: 1.05em;
+  font-weight: 500;
+  text-align: center;
+  margin: 0 8px;
+  word-break: break-word;
+  background: none;
+  border-radius: 6px;
+  padding: 2px 6px;
+  margin-top: 0;
+}
