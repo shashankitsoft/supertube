@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   IonAvatar,
   IonContent,
@@ -10,13 +11,22 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import "./Home.css";
-import { channelData } from "../data/channelData";
+
 
 const getYouTubeLogoURL = (channelId: string) =>
-  //`https://yt3.ggpht.com/${channelId}`;
   `https://yt3.googleusercontent.com/${channelId}`;
 
+import {type Channel, type ChannelData } from "../types";
+
 const Home: React.FC = () => {
+  const [channelData, setChannelData] = useState<ChannelData[]>([]);
+
+  useEffect(() => {
+    fetch("/channels.json")
+      .then((res) => res.json())
+      .then(setChannelData);
+  }, []);
+
   return (
     <IonPage>
       <IonHeader>
@@ -34,7 +44,7 @@ const Home: React.FC = () => {
           <div key={index} className="category">
             <h2 className="category-title">{category.category}</h2>
             <div className="channel-list">
-              {category.channels.map((channel, idx) => (
+              {category.channels.map((channel: Channel, idx: number) => (
                 <div
                   key={idx}
                   className="channel-card"

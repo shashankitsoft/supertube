@@ -26,6 +26,11 @@
             "name":"Ravish Kumar Official",
             "key":"X56fA0bSTvqSEoSIRPzggye_fFdKQQ9IZ8O9hoA5ZaEaSfJsXawGplhVLrhCwuFactWHSX9iBQ=s160-c-k-c0x00ffffff-no-rj",
             "handle":"@ravishkumar.official"
+         },
+         {
+            "name":"News 24",
+            "key":"ktfysjWVQCrBMIO2oQBBR58CAotdLThOhkevLiO7c_qAyVO2kap5LheweBUQt2JIMvC-iKTer0k=s160-c-k-c0x00ffffff-no-rj",
+            "handle":"@News24thinkfirst"
          }
       ]
    },
@@ -33,14 +38,14 @@
       "category":"Technology",
       "channels":[
          {
-            "name":"Marques Brownlee",
-            "key":"lkH37D712tiyphnu0Id0D5MwwQ7IRuwgQLVD05iMXlDWO-kDHut3uI4MgIEAQ9StK0qOST7fiA=s160-c-k-c0x00ffffff-no-rj",
+            "name":"Laravel Daily",
+            "key":"k4aBUqrrg5Lo2ufmGgI-Vma7lVCICIOAb7fz2mGt1bHhSCR_2eg-XvAvrAI7O_AtLE4PxpLx=s160-c-k-c0x00ffffff-no-rj",
             "handle":"@LaravelDaily"
          },
          {
-            "name":"Linus Tech Tips",
-            "key":"Vy6KL7EM_apxPSxF0pPy5w_c87YDTOlBQo3MADDF0Wl51kwxmt9wmRotnt2xQXwlrcyO0Xe56w=s160-c-k-c0x00ffffff-no-rj",
-            "handle":"@LinusTechTips"
+            "name":"TubeGuruji",
+            "key":"PtJSRdXfKAZ-DkNvnm9CMD5gCku6g7mfRFGYp-1xbLp1DGf7-RslL8P7-syPJNhjOniFsDI8YA=s160-c-k-c0x00ffffff-no-rj",
+            "handle":"@tubeguruji"
          }
       ]
    }

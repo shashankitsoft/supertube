@@ -4,15 +4,15 @@
     "name": "The Red Mike",
     "handle": "@TheRedMike.",
     "channelId": "UCW9A1mvMHxVrGViwx4WCbcQ",
-    "latestVideo": "https://www.youtube.com/watch?v=xd_ZUyfXXps",
-    "liveVideo": null
+    "latestVideo": "https://www.youtube.com/watch?v=4-UCRoJwUxc",
+    "liveVideo": "https://www.youtube.com/watch?v=qEc49y2P7EQ"
   },
   {
     "category": "News",
     "name": "BBC News",
     "handle": "@BBCNews",
     "channelId": "UC16niRr50-MSBwiO3YDb3RA",
-    "latestVideo": "https://www.youtube.com/watch?v=YaOcHVtQbRA",
+    "latestVideo": "https://www.youtube.com/watch?v=B65OoKBbnRQ",
     "liveVideo": null
   },
   {
@@ -36,8 +36,16 @@
     "name": "Ravish Kumar Official",
     "handle": "@ravishkumar.official",
     "channelId": "UC0yXUUIaPVAqZLgRjvtMftw",
-    "latestVideo": "https://www.youtube.com/watch?v=P-cZmqjr0HE",
+    "latestVideo": "https://www.youtube.com/watch?v=i1fAXDPcxnQ",
     "liveVideo": null
+  },
+  {
+    "category": "News",
+    "name": "News 24",
+    "handle": "@News24thinkfirst",
+    "channelId": "UCuzS3rPQAYqHcLWqOFuY0pw",
+    "latestVideo": "https://www.youtube.com/watch?v=c2oEo_ScgRY",
+    "liveVideo": "https://www.youtube.com/watch?v=PtXQYp_mwvM"
   },
   {
     "category": "Technology",
@@ -52,7 +60,7 @@
     "name": "Linus Tech Tips",
     "handle": "@LinusTechTips",
     "channelId": "UCXuqSBlHAE6Xw-yeJA0Tunw",
-    "latestVideo": "https://www.youtube.com/watch?v=SChh6MnYzjU",
+    "latestVideo": "https://www.youtube.com/watch?v=t_JfQEr9PQ0",
     "liveVideo": null
   }
 ]
