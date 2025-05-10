@@ -20,7 +20,7 @@ const Channels: React.FC = () => {
   const [channelData, setChannelData] = useState<ChannelData[]>([]);
 
   useEffect(() => {
-    fetch('/channels.json')
+    fetch(`${import.meta.env.BASE_URL}channels.json`)
       .then(res => res.json())
       .then(setChannelData);
   }, []);

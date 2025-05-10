@@ -36,7 +36,7 @@ const News: React.FC = () => {
   const playerContainerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    fetch("/youtube-data.json")
+    fetch(`${import.meta.env.BASE_URL}youtube-data.json`)
       .then((res) => res.json())
       .then(setVideos);
   }, []);

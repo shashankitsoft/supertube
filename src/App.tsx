@@ -51,7 +51,7 @@ setupIonicReact();
 
 const App: React.FC = () => (
   <IonApp>
-    <IonReactRouter>
+    <IonReactRouter basename="/supertube">
       <IonTabs>
         <IonRouterOutlet>
           <Route exact path="/channels">
@@ -76,7 +76,6 @@ const App: React.FC = () => (
             <IonIcon aria-hidden="true" icon={newspaper} />
             <IonLabel>News</IonLabel>
           </IonTabButton>
-          
           <IonTabButton tab="videos" href="/videos">
             <IonIcon aria-hidden="true" icon={videocam} />
             <IonLabel>Videos</IonLabel>

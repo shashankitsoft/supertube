@@ -14,7 +14,7 @@ const Videos: React.FC = () => {
   const [videos, setVideos] = useState<VideoEntry[]>([]);
 
   useEffect(() => {
-    fetch("/youtube-data.json")
+    fetch(`${import.meta.env.BASE_URL}youtube-data.json`)
       .then((res) => res.json())
       .then(setVideos);
   }, []);
