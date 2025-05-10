@@ -10,7 +10,7 @@ import {
   setupIonicReact
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, square, triangle } from 'ionicons/icons';
+import { logoYoutube, newspaper, videocam } from 'ionicons/icons';
 import News from './pages/News';
 import Channels from './pages/Channels';
 import Videos from './pages/Videos';
@@ -44,6 +44,7 @@ import '@ionic/react/css/palettes/dark.system.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import './global.css';
 
 
 setupIonicReact();
@@ -68,16 +69,16 @@ const App: React.FC = () => (
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
           <IonTabButton tab="channels" href="/channels">
-            <IonIcon aria-hidden="true" icon={ellipse} />
+            <IonIcon aria-hidden="true" icon={logoYoutube} />
             <IonLabel>Channels</IonLabel>
           </IonTabButton>
           <IonTabButton tab="news" href="/news">
-            <IonIcon aria-hidden="true" icon={triangle} />
+            <IonIcon aria-hidden="true" icon={newspaper} />
             <IonLabel>News</IonLabel>
           </IonTabButton>
           
           <IonTabButton tab="videos" href="/videos">
-            <IonIcon aria-hidden="true" icon={square} />
+            <IonIcon aria-hidden="true" icon={videocam} />
             <IonLabel>Videos</IonLabel>
           </IonTabButton>
         </IonTabBar>

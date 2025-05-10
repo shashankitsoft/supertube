@@ -1,12 +1,11 @@
 .news-section {
   margin-bottom: 32px;
+  padding-left: 16px;
 }
 .section-title {
-  color: #222;
-  font-size: 1.3em;
-  font-weight: 700;
-  margin: 16px 0 8px 8px;
-  letter-spacing: 0.01em;
+  margin: 0;
+  text-transform: capitalize;
+  padding: 10px 0 10px 8px;
   text-shadow: none;
 }
 .channel-list {

@@ -1,19 +1,13 @@
-import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
-  IonAvatar,
   IonContent,
   IonHeader,
-  IonItem,
-  IonLabel,
-  IonList,
   IonPage,
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
 //import axios from 'axios';
 import "./ChannelDetail.css";
-import { channelData } from "../data/channelData";
 
 const API_KEY = "YOUR_YOUTUBE_API_KEY";
 
@@ -26,7 +20,7 @@ interface Video {
 const ChannelDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   console.log("id", id);
-  const videos = [
+  const videos: Video[] = [
     { id: "aaa", title: "aaa", thumbnail: "aaa" },
     { id: "aaa", title: "aaa", thumbnail: "aaa" },
   ];

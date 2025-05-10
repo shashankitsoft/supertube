@@ -16,7 +16,7 @@ const VideoModal: React.FC<VideoModalProps> = ({ isOpen, onDidDismiss, selectedV
       tabIndex={0}
       onKeyDown={handleModalKeyDown}
     >
-      <h2>{selectedVideo?.title}</h2>
+      {/* <h2>{selectedVideo?.title}</h2> */}
       <div ref={playerContainerRef} id="yt-player-container" className="yt-player-container" />
       <IonButton onClick={onDidDismiss} className="close-btn">Close</IonButton>
       <div className="yt-controls-hint">Use YouTube controls for play/pause/fullscreen</div>
