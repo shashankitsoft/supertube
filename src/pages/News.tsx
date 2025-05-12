@@ -3,7 +3,7 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from "@ionic/rea
 import NewsSection from "../components/NewsSection";
 import VideoModal from "../components/VideoModal";
 import { VideoEntry, YTPlayer, YTPlayerConstructor } from "../types";
-import { BASE_PATH } from "../constants";
+import { REMOTE_BASE_URL } from "../constants";
 import "../components/VideoThumbnailCard.css";
 import "../components/VideoModal.css";
 import "../components/NewsSection.css";
@@ -37,7 +37,7 @@ const News: React.FC = () => {
   const playerContainerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    fetch(`${BASE_PATH}youtube-data.json`)
+    fetch(`${REMOTE_BASE_URL}youtube-data.json`)
       .then((res) => res.json())
       .then(setVideos);
   }, []);

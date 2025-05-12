@@ -9,13 +9,15 @@ import {
 import { VideoEntry } from "../types";
 import VideoThumbnailCard from "../components/VideoThumbnailCard";
 import "../components/VideoThumbnailCard.css";
-import { BASE_PATH } from "../constants";
+import { REMOTE_BASE_URL } from "../constants";
+
+
 
 const Videos: React.FC = () => {
   const [videos, setVideos] = useState<VideoEntry[]>([]);
 
   useEffect(() => {
-    fetch(`${BASE_PATH}youtube-data.json`)
+    fetch(`${REMOTE_BASE_URL}youtube-data.json`)
       .then((res) => res.json())
       .then(setVideos);
   }, []);
