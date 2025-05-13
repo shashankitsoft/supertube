@@ -34,3 +34,6 @@ yarn-error.log*
 .env.development
 .env.production
 .env.test
+
+/android
+/ios
