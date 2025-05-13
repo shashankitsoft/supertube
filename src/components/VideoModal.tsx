@@ -37,9 +37,8 @@ const VideoModal: React.FC<VideoModalProps> = ({ isOpen, onDidDismiss, selectedV
           <IonButton
             onClick={() => selectedVideo && openInYouTube(selectedVideo.videoId)}
             className="yt-btn"
-            color="medium"
           >
-            <IonIcon icon={logoYoutube} className="yt-icon" slot="start" />
+            <IonIcon icon={logoYoutube}  className="yt-icon" slot="start" />
             Play in YouTube
           </IonButton>
           <IonButton onClick={onDidDismiss} className="close-btn">Close</IonButton>

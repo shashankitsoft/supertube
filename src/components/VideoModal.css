@@ -13,7 +13,6 @@
   margin-bottom: 16px;
 }
 .close-btn {
-  margin-top: 16px;
   min-width: 100px;
 }
 .yt-controls-hint {
@@ -30,6 +29,8 @@
 }
 .yt-btn {
   --background: #ff0000;
+  --background-hover: #e60000;
+  --background-activated: #cc0000;
   --color: #fff;
   font-weight: 500;
   display: flex;
@@ -37,6 +38,13 @@
   font-size: 1rem;
   padding: 0 18px;
   min-width: 120px;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+  transition: background 0.2s;
+}
+.yt-btn:focus,
+.yt-btn:hover {
+  --background: #e60000;
 }
 .yt-btn .yt-icon {
   width: 1.2em;

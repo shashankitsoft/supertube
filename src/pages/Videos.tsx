@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import {
   IonContent,
   IonHeader,
@@ -12,7 +12,6 @@ import VideoModal from "../components/VideoModal";
 import "../components/VideoThumbnailCard.css";
 import "../components/VideoModal.css";
 import { REMOTE_BASE_URL } from "../constants";
-import { createYouTubePlayer, destroyYouTubePlayer } from "../utils/ytPlayer";
 
 const Videos: React.FC = () => {
   const [videos, setVideos] = useState<VideoEntry[]>([]);
@@ -21,8 +20,6 @@ const Videos: React.FC = () => {
     videoId: string;
     title: string;
   } | null>(null);
-  const playerRef = useRef<any>(null);
-  const playerContainerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     fetch(`${REMOTE_BASE_URL}youtube-data.json`)
@@ -40,19 +37,6 @@ const Videos: React.FC = () => {
         return map;
       }, new Map<string, VideoEntry[]>())
   );
-
-  // Handle modal open/close and YouTube Player API (same as News)
-  useEffect(() => {
-    if (!modalOpen || !selectedVideo) return;
-    const container = playerContainerRef.current;
-    playerRef.current = container && selectedVideo.videoId
-      ? createYouTubePlayer(container, selectedVideo.videoId)
-      : null;
-    return () => {
-      destroyYouTubePlayer(playerRef.current, container!);
-      playerRef.current = null;
-    };
-  }, [modalOpen, selectedVideo]);
 
   // Keyboard navigation: Enter/OK to open, Escape to close
   const handleCardKeyDown = (

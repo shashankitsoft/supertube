@@ -4,7 +4,6 @@
  * Loads the YouTube IFrame API script and calls the callback when ready.
  * Ensures the script is loaded only once.
  */
-
 declare global {
   interface Window {
     onYouTubeIframeAPIReady?: () => void;
@@ -48,4 +47,37 @@ export function openInYouTube(videoId: string) {
   } else {
     window.open(`https://www.youtube.com/watch?v=${videoId}`, "_blank");
   }
+}
+
+/**
+ * (Legacy) Create and destroy YouTube IFrame Player in a container. Not used with iframe modal, but kept for reference.
+ */
+export function createYouTubePlayer(
+  container: HTMLElement,
+  videoId: string,
+  onReady?: () => void
+) {
+  if (!container || !videoId) return null;
+  container.innerHTML = "";
+  function tryCreate() {
+    // @ts-ignore
+    if (window.YT && window.YT.Player) {
+      // @ts-ignore
+      const player = new window.YT.Player(container, {
+        height: "360",
+        width: "640",
+        videoId,
+        playerVars: { autoplay: 1 },
+        events: onReady ? { onReady } : undefined,
+      });
+      return player;
+    } else {
+      setTimeout(tryCreate, 100);
+    }
+  }
+  return tryCreate();
+}
+export function destroyYouTubePlayer(player: any, container?: HTMLElement) {
+  if (player && typeof player.destroy === "function") player.destroy();
+  if (container) container.innerHTML = "";
 }
