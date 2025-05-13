@@ -15,6 +15,7 @@ import News from './pages/News';
 import Channels from './pages/Channels';
 import Videos from './pages/Videos';
 import { BASE_PATH } from './constants';
+import { loadYouTubeAPI } from './utils/youtube';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -47,6 +48,9 @@ import '@ionic/react/css/palettes/dark.system.css';
 import './theme/variables.css';
 import './global.css';
 
+
+// Load YouTube IFrame API globally
+loadYouTubeAPI(() => {});
 
 setupIonicReact();
 

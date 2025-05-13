@@ -24,7 +24,6 @@ const VideoThumbnailCard: React.FC<VideoThumbnailCardProps> = ({ video, channelN
       </div>
       <div className="video-desc">{video.description}</div>
     </div>
-    <div className="video-embed placeholder">Press OK/Enter to play</div>
   </div>
 );
 
