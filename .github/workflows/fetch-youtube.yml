@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # fetch all branches for later checkout
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -24,10 +26,21 @@ jobs:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
         run: node fetch-youtube.js
 
-      - name: Commit and push
+      - name: Commit and push to main
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add public/youtube-data.json
           git commit -m "Update YouTube data [skip ci]" || echo "No changes to commit"
-          git push
+          git push origin main
+
+      - name: Update gh-pages branch with new data
+        run: |
+          git fetch origin gh-pages:gh-pages || echo "No gh-pages branch yet"
+          git checkout gh-pages || echo "No gh-pages branch to update"
+          cp public/youtube-data.json public/youtube-data.json
+          git add public/youtube-data.json
+          git commit -m "Update YouTube data [skip ci]" || echo "No changes to commit"
+          git push origin gh-pages || echo "No gh-pages branch to push"
+          git checkout main
+        continue-on-error: true
