@@ -1,5 +1,6 @@
 import React from "react";
 import { VideoInfo } from "../types";
+import "./VideoThumbnailCard.css";
 
 interface VideoThumbnailCardProps {
   video: VideoInfo;

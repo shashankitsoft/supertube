@@ -11,7 +11,7 @@ import VideoThumbnailCard from "../components/VideoThumbnailCard";
 import VideoModal from "../components/VideoModal";
 import "../components/VideoThumbnailCard.css";
 import "../components/VideoModal.css";
-import { REMOTE_BASE_URL } from "../constants";
+import { BASE_PATH, REMOTE_BASE_URL } from "../constants";
 
 const Videos: React.FC = () => {
   const [videos, setVideos] = useState<VideoEntry[]>([]);
@@ -56,7 +56,14 @@ const Videos: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Videos</IonTitle>
+          <IonTitle>
+              <img
+                src={`${BASE_PATH}assets/icon/supertube-32x32.png`}
+                alt="SuperTube Logo"
+                className="logo"
+              />
+              Videos
+          </IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>

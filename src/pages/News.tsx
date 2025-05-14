@@ -3,10 +3,7 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from "@ionic/rea
 import NewsSection from "../components/NewsSection";
 import VideoModal from "../components/VideoModal";
 import { VideoEntry } from "../types";
-import { REMOTE_BASE_URL } from "../constants";
-import "../components/VideoThumbnailCard.css";
-import "../components/VideoModal.css";
-import "../components/NewsSection.css";
+import { BASE_PATH, REMOTE_BASE_URL } from "../constants";
 
 const News: React.FC = () => {
   const [videos, setVideos] = useState<VideoEntry[]>([]);
@@ -41,7 +38,14 @@ const News: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>News</IonTitle>
+          <IonTitle>
+            <img
+              src={`${BASE_PATH}assets/icon/supertube-32x32.png`}
+              alt="SuperTube Logo"
+              className="logo"
+            />
+            News
+          </IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>

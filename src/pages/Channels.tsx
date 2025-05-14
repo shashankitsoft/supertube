@@ -52,7 +52,14 @@ const Channels: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Channels</IonTitle>
+          <IonTitle>
+            <img
+              src={`${BASE_PATH}assets/icon/supertube-32x32.png`}
+              alt="SuperTube Logo"
+              className="logo"
+            />
+            Channels
+          </IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>

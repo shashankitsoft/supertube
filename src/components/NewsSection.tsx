@@ -1,4 +1,5 @@
 import React from "react";
+import "./NewsSection.css";
 import VideoThumbnailCard from "./VideoThumbnailCard";
 import { VideoEntry } from "../types";
 
