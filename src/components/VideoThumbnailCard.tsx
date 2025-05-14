@@ -7,9 +7,10 @@ interface VideoThumbnailCardProps {
   video: VideoInfo;
   channelName: string;
   onClick: () => void;
+  onKeyDown: (e: React.KeyboardEvent) => void;
 }
 
-const VideoThumbnailCard: React.FC<VideoThumbnailCardProps> = ({ video, channelName, onClick }) => {
+const VideoThumbnailCard: React.FC<VideoThumbnailCardProps> = ({ video, channelName, onClick, onKeyDown }) => {
   const { ref, focused } = useFocusable();
   return (
     <div
@@ -17,6 +18,7 @@ const VideoThumbnailCard: React.FC<VideoThumbnailCardProps> = ({ video, channelN
       className={`channel-card-rect focusable${focused ? ' focused' : ''}`}
       tabIndex={0}
       onClick={onClick}
+      onKeyDown={onKeyDown}
     >
       <img className="video-thumb" src={video.thumbnail || ''} alt={video.title + ' thumbnail'} />
       <div className="video-info">
