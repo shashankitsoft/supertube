@@ -10,10 +10,7 @@ import {
 import {type Channel, type ChannelData} from '../types';
 import { BASE_PATH } from "../constants";
 import "./Channels.css";
-
-
-const getYouTubeLogoURL = (channelId: string) =>
-  `https://yt3.googleusercontent.com/${channelId}`;
+import ChannelCard from '../components/ChannelCard';
 
 const Channels: React.FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -73,22 +70,7 @@ const Channels: React.FC = () => {
             <h2 className="category-title">{category.category}</h2>
             <div className="channel-list">
               {category.channels.map((channel, idx) => (
-                <div
-                  key={idx}
-                  className="channel-square-card focusable"
-                  tabIndex={0}
-                  onClick={() => handleChannelClick(channel)}
-                  onKeyDown={e => { if (e.key === 'Enter') handleChannelClick(channel); }}
-                >
-                  <div className="channel-logo-name">
-                    <img
-                      src={getYouTubeLogoURL(channel.key)}
-                      alt={`${channel.name} logo`}
-                      className="channel-logo"
-                    />
-                    <div className="channel-title">{channel.name}</div>
-                  </div>
-                </div>
+                <ChannelCard key={idx} channel={channel} onClick={handleChannelClick} />
               ))}
             </div>
           </div>

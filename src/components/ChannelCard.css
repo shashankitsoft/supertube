@@ -1,0 +1,43 @@
+.channel-square-card {
+  background: #181818;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px #000a;
+  width: 160px;
+  min-width: 160px;
+  height: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  border: 1.5px solid #222;
+  transition: box-shadow 0.2s, border-color 0.2s, transform 0.18s;
+  cursor: pointer;
+  margin-left: 4px;
+  margin-right: 4px;
+}
+.channel-square-card:focus, .channel-square-card:hover, .channel-square-card.focused {
+  outline: none;
+  border: 2px solid #ff0000;
+  box-shadow: 0 0 0 2px #ff000044, 0 4px 16px #000c;
+  transform: scale(1.07);
+  z-index: 2;
+}
+.channel-logo-name {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.channel-logo {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  margin-bottom: 8px;
+  background: #111;
+}
+.channel-title {
+  color: #fff;
+  font-size: 1.1em;
+  font-weight: 600;
+  text-align: center;
+}
