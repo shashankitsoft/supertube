@@ -1,4 +1,6 @@
 // Common YouTube utility functions for reuse across components
+import { Browser } from "@capacitor/browser";
+import { isPlatform } from "@ionic/react";
 
 /**
  * Loads the YouTube IFrame API script and calls the callback when ready.
@@ -37,15 +39,23 @@ export function extractYouTubeVideoId(url: string): string {
 /**
  * Opens a YouTube video in the YouTube app (on Android/Capacitor) or in a new tab (web/PWA).
  */
-export function openInYouTube(videoId: string) {
+export async function openInYouTube(videoId: string) {
   if (!videoId) return;
-  const isAndroid = /android/i.test(navigator.userAgent);
-  const isCapacitor = (window as any).Capacitor !== undefined;
-  if (isAndroid && isCapacitor) {
-    const intentUrl = `intent://www.youtube.com/watch?v=${videoId}#Intent;package=com.google.android.youtube;scheme=https;end`;
-    window.location.href = intentUrl;
+  const url = `https://www.youtube.com/watch?v=${videoId}`;
+  if (isPlatform("android")) {
+    // Try to open in YouTube app via deep link
+    try {
+      window.open(`vnd.youtube:${videoId}`, "_system");
+    } catch (e) {
+      // Fallback: open in browser via Capacitor Browser plugin
+      await Browser.open({ url });
+    }
+  } else if ((window as any).Capacitor) {
+    // iOS or other Capacitor platforms: open in system browser
+    await Browser.open({ url });
   } else {
-    window.open(`https://www.youtube.com/watch?v=${videoId}`, "_blank");
+    // Web/PWA: open in new tab
+    window.open(url, "_blank");
   }
 }
 
