@@ -10,7 +10,8 @@ import {
 import {type Channel, type ChannelData} from '../types';
 import { BASE_PATH } from "../constants";
 import "./Channels.css";
-import ChannelCard from '../components/ChannelCard';
+import { useFocusable } from '@noriginmedia/norigin-spatial-navigation';
+import ChannelsCategorySection from '../components/ChannelsCategorySection';
 
 const Channels: React.FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -45,6 +46,8 @@ const Channels: React.FC = () => {
     }
   };
 
+  const { ref: pageRef, focusKey: pageFocusKey } = useFocusable({ trackChildren: true });
+
   return (
     <IonPage>
       <IonHeader>
@@ -65,16 +68,16 @@ const Channels: React.FC = () => {
             <IonTitle size="large">Channels</IonTitle>
           </IonToolbar>
         </IonHeader>
-        {channelData.map((category, index) => (
-          <div key={index} className="category">
-            <h2 className="category-title">{category.category}</h2>
-            <div className="channel-list">
-              {category.channels.map((channel, idx) => (
-                <ChannelCard key={idx} channel={channel} onClick={handleChannelClick} />
-              ))}
-            </div>
-          </div>
-        ))}
+        <div ref={pageRef}>
+          {channelData.map((category, index) => (
+            <ChannelsCategorySection
+              key={index}
+              category={category}
+              parentFocusKey={pageFocusKey}
+              onChannelSelect={handleChannelClick}
+            />
+          ))}
+        </div>
         <IonModal isOpen={modalOpen} onDidDismiss={() => setModalOpen(false)} backdropDismiss={true}>
           <div
             className="channel-modal-content"

@@ -7,11 +7,11 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import { VideoEntry } from "../types";
-import VideoThumbnailCard from "../components/VideoThumbnailCard";
 import VideoModal from "../components/VideoModal";
-import "../components/VideoThumbnailCard.css";
+import VideoCategoryRow from "../components/VideoCategoryRow";
 import "../components/VideoModal.css";
 import { BASE_PATH, REMOTE_BASE_URL } from "../constants";
+import { useFocusable } from "@noriginmedia/norigin-spatial-navigation";
 
 const Videos: React.FC = () => {
   const [videos, setVideos] = useState<VideoEntry[]>([]);
@@ -38,18 +38,16 @@ const Videos: React.FC = () => {
       }, new Map<string, VideoEntry[]>())
   );
 
-  // Keyboard navigation: Enter/OK to open, Escape to close
-  const handleCardKeyDown = (
-    e: React.KeyboardEvent,
-    video: { videoId: string; title: string }
-  ) => {
-    if (e.key === "Enter" || e.key === " ") {
-      setSelectedVideo(video);
-      setModalOpen(true);
-    }
-  };
+  // Top-level focusable container for all categories
+  const { ref: listRef, focusKey: listFocusKey } = useFocusable({ trackChildren: true });
+
   const handleModalKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Escape") setModalOpen(false);
+  };
+
+  const handleCardSelect = (video: { videoId: string; title: string }) => {
+    setSelectedVideo(video);
+    setModalOpen(true);
   };
 
   return (
@@ -72,39 +70,17 @@ const Videos: React.FC = () => {
             <IonTitle size="large">Videos</IonTitle>
           </IonToolbar>
         </IonHeader>
-        {categories.map(([category, entries]) => (
-          <div key={category} className="category">
-            <h2 className="category-title">{category}</h2>
-            <div className="channel-list">
-              {entries.map((entry, idx) => {
-                if (!entry.latestVideo) return null;
-                // Extract videoId from url
-                const match = entry.latestVideo.url.match(/[?&]v=([^&]+)/);
-                const videoId = match ? match[1] : "";
-                return (
-                  <VideoThumbnailCard
-                    key={idx}
-                    video={entry.latestVideo}
-                    channelName={entry.name}
-                    onClick={() => {
-                      setSelectedVideo({
-                        videoId,
-                        title: entry.latestVideo!.title,
-                      });
-                      setModalOpen(true);
-                    }}
-                    onKeyDown={(e) =>
-                      handleCardKeyDown(e, {
-                        videoId,
-                        title: entry.latestVideo!.title,
-                      })
-                    }
-                  />
-                );
-              })}
-            </div>
-          </div>
-        ))}
+        <div ref={listRef}>
+          {categories.map(([category, entries]) => (
+            <VideoCategoryRow
+              key={category}
+              category={category}
+              entries={entries}
+              parentFocusKey={listFocusKey}
+              onCardSelect={handleCardSelect}
+            />
+          ))}
+        </div>
         <VideoModal
           isOpen={modalOpen}
           onDidDismiss={() => setModalOpen(false)}

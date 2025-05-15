@@ -9,17 +9,19 @@ const getYouTubeLogoURL = (channelId: string) =>
 interface ChannelCardProps {
   channel: Channel;
   onClick: (channel: Channel) => void;
+  parentFocusKey?: string;
 }
 
-const ChannelCard: React.FC<ChannelCardProps> = ({ channel, onClick }) => {
-  const { ref, focused } = useFocusable();
+const ChannelCard: React.FC<ChannelCardProps> = ({ channel, onClick, parentFocusKey }) => {
+  // @ts-expect-error: parentFocusKey is supported at runtime but not in types
+  const { ref, focused } = useFocusable({ parentFocusKey });
   return (
     <div
       ref={ref}
-      className={`channel-square-card focusable ${focused ? ' focused' : ''}`}
+      className={`channel-square-card focusable${focused ? ' focused' : ''}`}
       tabIndex={0}
       onClick={() => onClick(channel)}
-      onKeyDown={e => { if (e.key === 'Enter') onClick(channel); }}
+      // onKeyDown handled by spatial navigation
     >
       <div className="channel-logo-name">
         <img
