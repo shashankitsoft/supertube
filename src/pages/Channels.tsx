@@ -47,14 +47,12 @@ const Channels: React.FC = () => {
   };
 
   const { ref: pageRef, focusKey: pageFocusKey } = useFocusable({ trackChildren: true });
-
-  // Modal focusable hierarchy for TV/remote navigation
-  // @ts-expect-error: parentFocusKey is supported at runtime but not in types
-  const { ref: modalRef, focusKey: modalFocusKey } = useFocusable({ isFocusBoundary: true });
-  // @ts-expect-error: parentFocusKey is supported at runtime but not in types
-  const { ref: liveBtnRef, focused: liveBtnFocused } = useFocusable({ parentFocusKey: modalFocusKey });
-  // @ts-expect-error: parentFocusKey is supported at runtime but not in types
-  const { ref: videosBtnRef, focused: videosBtnFocused } = useFocusable({ parentFocusKey: modalFocusKey });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { ref: modalRef, focusKey: modalFocusKey } = useFocusable({ parentFocusKey: pageFocusKey, isFocusBoundary: true } as any);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { ref: liveBtnRef, focused: liveBtnFocused } = useFocusable({ parentFocusKey: modalFocusKey } as any);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { ref: videosBtnRef, focused: videosBtnFocused } = useFocusable({ parentFocusKey: modalFocusKey } as any);
 
   return (
     <IonPage>

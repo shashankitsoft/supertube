@@ -12,8 +12,8 @@ interface ChannelsCategorySectionProps {
 
 const ChannelsCategorySection: React.FC<ChannelsCategorySectionProps> = ({ category, parentFocusKey, onChannelSelect }) => {
   // Row focusable (horizontal navigation)
-  // @ts-expect-error: parentFocusKey is supported at runtime but not in types
-  const { ref: rowRef, focusKey: rowFocusKey } = useFocusable({ parentFocusKey, trackChildren: true });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { ref: rowRef, focusKey: rowFocusKey } = useFocusable({ parentFocusKey, trackChildren: true } as any);
   if (!category.channels || category.channels.length === 0) return null;
   return (
     <div className="category">

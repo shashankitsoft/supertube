@@ -14,12 +14,12 @@ interface VideoModalProps {
 
 const VideoModal: React.FC<VideoModalProps> = ({ isOpen, onDidDismiss, selectedVideo, handleModalKeyDown }) => {
   // Modal focusable hierarchy for TV/remote navigation
-  // @ts-expect-error: parentFocusKey is supported at runtime but not in types
-  const { ref: modalRef, focusKey: modalFocusKey } = useFocusable({ isFocusBoundary: true });
-  // @ts-expect-error: parentFocusKey is supported at runtime but not in types
-  const { ref: ytBtnRef, focused: ytBtnFocused } = useFocusable({ parentFocusKey: modalFocusKey });
-  // @ts-expect-error: parentFocusKey is supported at runtime but not in types
-  const { ref: closeBtnRef, focused: closeBtnFocused } = useFocusable({ parentFocusKey: modalFocusKey });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { ref: modalRef, focusKey: modalFocusKey } = useFocusable({ isFocusBoundary: true } as any);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { ref: ytBtnRef, focused: ytBtnFocused } = useFocusable({ parentFocusKey: modalFocusKey } as any);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { ref: closeBtnRef, focused: closeBtnFocused } = useFocusable({ parentFocusKey: modalFocusKey } as any);
   return (
     <IonModal isOpen={isOpen} onDidDismiss={onDidDismiss}>
       <div
