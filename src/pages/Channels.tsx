@@ -48,6 +48,14 @@ const Channels: React.FC = () => {
 
   const { ref: pageRef, focusKey: pageFocusKey } = useFocusable({ trackChildren: true });
 
+  // Modal focusable hierarchy for TV/remote navigation
+  // @ts-expect-error: parentFocusKey is supported at runtime but not in types
+  const { ref: modalRef, focusKey: modalFocusKey } = useFocusable({ isFocusBoundary: true });
+  // @ts-expect-error: parentFocusKey is supported at runtime but not in types
+  const { ref: liveBtnRef, focused: liveBtnFocused } = useFocusable({ parentFocusKey: modalFocusKey });
+  // @ts-expect-error: parentFocusKey is supported at runtime but not in types
+  const { ref: videosBtnRef, focused: videosBtnFocused } = useFocusable({ parentFocusKey: modalFocusKey });
+
   return (
     <IonPage>
       <IonHeader>
@@ -69,7 +77,7 @@ const Channels: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <div ref={pageRef}>
-          {channelData.map((category, index) => (
+          {channelData.length > 0 && channelData.map((category, index) => (
             <ChannelsCategorySection
               key={index}
               category={category}
@@ -81,25 +89,28 @@ const Channels: React.FC = () => {
         <IonModal isOpen={modalOpen} onDidDismiss={() => setModalOpen(false)} backdropDismiss={true}>
           <div
             className="channel-modal-content"
-            tabIndex={0}
-            onKeyDown={handleModalKeyDown}
+            ref={modalRef}
+            tabIndex={-1}
+            // onKeyDown={handleModalKeyDown} // spatial navigation now handles key events; keep for future reference
           >
             <div
               id="modal-live-btn"
-              className="modal-action-btn modal-action-btn-live"
-              tabIndex={0}
+              className={`modal-action-btn modal-action-btn-live${liveBtnFocused ? ' focused' : ''}`}
+              ref={liveBtnRef}
+              tabIndex={-1}
               onClick={() => handleModalAction('live')}
-              onKeyDown={e => { if (e.key === 'Enter') handleModalAction('live'); }}
+              // onKeyDown={e => { if (e.key === 'Enter') handleModalAction('live'); }} // keep for future reference
             >
               <span role="img" aria-label="Live" className="modal-action-icon">🔴</span>
               Live
             </div>
             <div
               id="modal-videos-btn"
-              className="modal-action-btn modal-action-btn-videos"
-              tabIndex={0}
+              className={`modal-action-btn modal-action-btn-videos${videosBtnFocused ? ' focused' : ''}`}
+              ref={videosBtnRef}
+              tabIndex={-1}
               onClick={() => handleModalAction('videos')}
-              onKeyDown={e => { if (e.key === 'Enter') handleModalAction('videos'); }}
+              // onKeyDown={e => { if (e.key === 'Enter') handleModalAction('videos'); }} // keep for future reference
             >
               <span role="img" aria-label="Videos" className="modal-action-icon">🎬</span>
               Videos

@@ -14,6 +14,7 @@ const ChannelsCategorySection: React.FC<ChannelsCategorySectionProps> = ({ categ
   // Row focusable (horizontal navigation)
   // @ts-expect-error: parentFocusKey is supported at runtime but not in types
   const { ref: rowRef, focusKey: rowFocusKey } = useFocusable({ parentFocusKey, trackChildren: true });
+  if (!category.channels || category.channels.length === 0) return null;
   return (
     <div className="category">
       <h2 className="category-title">{category.category}</h2>

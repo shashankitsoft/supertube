@@ -4,6 +4,11 @@ import App from './App';
 import { init } from '@noriginmedia/norigin-spatial-navigation';
 
 init();
+// init({
+//   debug: true,
+//   visualDebug: true,
+//   throttle: 0,
+// });
 
 const container = document.getElementById('root');
 const root = createRoot(container!);
