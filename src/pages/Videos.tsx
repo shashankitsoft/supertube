@@ -71,15 +71,19 @@ const Videos: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <div ref={listRef}>
-          {categories.map(([category, entries]) => (
-            <VideoCategoryRow
-              key={category}
-              category={category}
-              entries={entries}
-              parentFocusKey={listFocusKey}
-              onCardSelect={handleCardSelect}
-            />
-          ))}
+          {categories.length === 0 ? (
+            <div className="empty-row" />
+          ) : (
+            categories.map(([category, entries]) => (
+              <VideoCategoryRow
+                key={category}
+                category={category}
+                entries={entries}
+                parentFocusKey={listFocusKey}
+                onCardSelect={handleCardSelect}
+              />
+            ))
+          )}
         </div>
         <VideoModal
           isOpen={modalOpen}

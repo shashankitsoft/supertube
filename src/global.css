@@ -25,3 +25,6 @@
   text-transform: capitalize;
 }
 
+.empty-row {
+  min-height: 40px;
+}

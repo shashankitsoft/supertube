@@ -30,7 +30,7 @@ const News: React.FC = () => {
   };
 
   // Make News page a focusable container
-  const { ref: pageRef, focusKey: pageFocusKey } = useFocusable();
+  const { ref: pageRef, focusKey: pageFocusKey } = useFocusable({ trackChildren: true });
 
   return (
     <IonPage>
@@ -53,26 +53,32 @@ const News: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <div ref={pageRef}>
-          <NewsSection
-            title="Live"
-            videos={liveNews}
-            isLive={true}
-            onCardSelect={(video) => {
-              setSelectedVideo(video);
-              setModalOpen(true);
-            }}
-            parentFocusKey={pageFocusKey}
-          />
-          <NewsSection
-            title="Latest"
-            videos={latestNews}
-            isLive={false}
-            onCardSelect={(video) => {
-              setSelectedVideo(video);
-              setModalOpen(true);
-            }}
-            parentFocusKey={pageFocusKey}
-          />
+          {liveNews.length === 0 && latestNews.length === 0 ? (
+            <div className="empty-row" />
+          ) : (
+            <>
+              <NewsSection
+                title="Live"
+                videos={liveNews}
+                isLive={true}
+                onCardSelect={(video) => {
+                  setSelectedVideo(video);
+                  setModalOpen(true);
+                }}
+                parentFocusKey={pageFocusKey}
+              />
+              <NewsSection
+                title="Latest"
+                videos={latestNews}
+                isLive={false}
+                onCardSelect={(video) => {
+                  setSelectedVideo(video);
+                  setModalOpen(true);
+                }}
+                parentFocusKey={pageFocusKey}
+              />
+            </>
+          )}
         </div>
         <VideoModal
           isOpen={modalOpen}

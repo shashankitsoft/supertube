@@ -13,15 +13,14 @@ interface ChannelCardProps {
 }
 
 const ChannelCard: React.FC<ChannelCardProps> = ({ channel, onClick, parentFocusKey }) => {
-  // @ts-expect-error: parentFocusKey is supported at runtime but not in types
-  const { ref, focused } = useFocusable({ parentFocusKey });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { ref, focused } = useFocusable({ parentFocusKey } as any);
   return (
     <div
       ref={ref}
       className={`channel-square-card focusable${focused ? ' focused' : ''}`}
       tabIndex={0}
       onClick={() => onClick(channel)}
-      // onKeyDown handled by spatial navigation
     >
       <div className="channel-logo-name">
         <img

@@ -11,15 +11,14 @@ interface VideoThumbnailCardProps {
 }
 
 const VideoThumbnailCard: React.FC<VideoThumbnailCardProps> = ({ video, channelName, onClick, parentFocusKey }) => {
-  // @ts-expect-error: parentFocusKey is supported at runtime but not in types
-  const { ref, focused } = useFocusable({ parentFocusKey });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { ref, focused } = useFocusable({ parentFocusKey } as any);
   return (
     <div
       ref={ref}
       className={`channel-card-rect focusable${focused ? ' focused' : ''}`}
       tabIndex={0}
       onClick={onClick}
-      // onKeyDown handled by spatial navigation
     >
       <img className="video-thumb" src={video.thumbnail || ''} alt={video.title + ' thumbnail'} />
       <div className="video-info">

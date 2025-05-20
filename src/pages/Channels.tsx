@@ -47,12 +47,6 @@ const Channels: React.FC = () => {
   };
 
   const { ref: pageRef, focusKey: pageFocusKey } = useFocusable({ trackChildren: true });
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { ref: modalRef, focusKey: modalFocusKey } = useFocusable({ parentFocusKey: pageFocusKey, isFocusBoundary: true } as any);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { ref: liveBtnRef, focused: liveBtnFocused } = useFocusable({ parentFocusKey: modalFocusKey } as any);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { ref: videosBtnRef, focused: videosBtnFocused } = useFocusable({ parentFocusKey: modalFocusKey } as any);
 
   return (
     <IonPage>
@@ -75,27 +69,25 @@ const Channels: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <div ref={pageRef}>
-          {channelData.length > 0 && channelData.map((category, index) => (
-            <ChannelsCategorySection
-              key={index}
-              category={category}
-              parentFocusKey={pageFocusKey}
-              onChannelSelect={handleChannelClick}
-            />
-          ))}
+          {channelData.length === 0 ? (
+            <div className="empty-row" />
+          ) : (
+            channelData.map((category, index) => (
+              <ChannelsCategorySection
+                key={index}
+                category={category}
+                parentFocusKey={pageFocusKey}
+                onChannelSelect={handleChannelClick}
+              />
+            ))
+          )}
         </div>
         <IonModal isOpen={modalOpen} onDidDismiss={() => setModalOpen(false)} backdropDismiss={true}>
-          <div
-            className="channel-modal-content"
-            ref={modalRef}
-            tabIndex={-1}
-            // onKeyDown={handleModalKeyDown} // spatial navigation now handles key events; keep for future reference
-          >
+          <div className="channel-modal-content">
             <div
               id="modal-live-btn"
-              className={`modal-action-btn modal-action-btn-live${liveBtnFocused ? ' focused' : ''}`}
-              ref={liveBtnRef}
-              tabIndex={-1}
+              className="modal-action-btn modal-action-btn-live"
+              tabIndex={0}
               onClick={() => handleModalAction('live')}
               // onKeyDown={e => { if (e.key === 'Enter') handleModalAction('live'); }} // keep for future reference
             >
@@ -104,11 +96,10 @@ const Channels: React.FC = () => {
             </div>
             <div
               id="modal-videos-btn"
-              className={`modal-action-btn modal-action-btn-videos${videosBtnFocused ? ' focused' : ''}`}
-              ref={videosBtnRef}
-              tabIndex={-1}
+              className="modal-action-btn modal-action-btn-videos"
+              tabIndex={0}
               onClick={() => handleModalAction('videos')}
-              // onKeyDown={e => { if (e.key === 'Enter') handleModalAction('videos'); }} // keep for future reference
+              // onKeyDown={handleModalKeyDown} // keep for future reference
             >
               <span role="img" aria-label="Videos" className="modal-action-icon">🎬</span>
               Videos
