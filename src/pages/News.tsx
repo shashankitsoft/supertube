@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from "@ionic/react";
+import { useLocation } from "react-router-dom";
 import NewsSection from "../components/NewsSection";
 import VideoModal from "../components/VideoModal";
 import { VideoEntry } from "../types";
@@ -10,12 +11,21 @@ const News: React.FC = () => {
   const [videos, setVideos] = useState<VideoEntry[]>([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedVideo, setSelectedVideo] = useState<{ videoId: string; title: string } | null>(null);
+  const location = useLocation();
+  const isActiveRoute = location.pathname === "/news";
+  const { ref: pageRef, focusKey: pageFocusKey, focusSelf } = useFocusable({ trackChildren: true });
 
   useEffect(() => {
     fetch(`${REMOTE_BASE_URL}youtube-data.json`)
       .then((res) => res.json())
       .then(setVideos);
   }, []);
+
+  useEffect(() => {
+    if (isActiveRoute) {
+      focusSelf();
+    }
+  }, [isActiveRoute, focusSelf]);
 
   // Filter News entries
   const newsEntries = videos.filter((entry) => entry.category === "News");
@@ -28,9 +38,6 @@ const News: React.FC = () => {
   const handleModalKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Escape") setModalOpen(false);
   };
-
-  // Make News page a focusable container
-  const { ref: pageRef, focusKey: pageFocusKey } = useFocusable({ trackChildren: true });
 
   return (
     <IonPage>

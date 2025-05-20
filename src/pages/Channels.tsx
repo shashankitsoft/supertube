@@ -12,17 +12,27 @@ import { BASE_PATH } from "../constants";
 import "./Channels.css";
 import { useFocusable } from '@noriginmedia/norigin-spatial-navigation';
 import ChannelsCategorySection from '../components/ChannelsCategorySection';
+import { useLocation } from "react-router-dom";
 
 const Channels: React.FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedChannel, setSelectedChannel] = useState<Channel | null>(null);
   const [channelData, setChannelData] = useState<ChannelData[]>([]);
+  const location = useLocation();
+  const isActiveRoute = location.pathname === "/channels";
+  const { ref: pageRef, focusKey: pageFocusKey, focusSelf } = useFocusable({ trackChildren: true });
 
   useEffect(() => {
     fetch(`${BASE_PATH}channels.json`)
       .then(res => res.json())
       .then(setChannelData);
   }, []);
+
+  useEffect(() => {
+    if (isActiveRoute) {
+      focusSelf();
+    }
+  }, [isActiveRoute, focusSelf]);
 
   const handleChannelClick = (channel: Channel) => {
     setSelectedChannel(channel);
@@ -45,8 +55,6 @@ const Channels: React.FC = () => {
       setModalOpen(false);
     }
   };
-
-  const { ref: pageRef, focusKey: pageFocusKey } = useFocusable({ trackChildren: true });
 
   return (
     <IonPage>

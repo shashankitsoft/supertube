@@ -12,10 +12,10 @@ interface VideoCategoryRowProps {
 
 const VideoCategoryRow: React.FC<VideoCategoryRowProps> = ({ category, entries, parentFocusKey, onCardSelect }) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { ref: rowRef, focusKey: rowFocusKey } = useFocusable({ parentFocusKey, trackChildren: true } as any);
+  const { ref: rowRef, focusKey: rowFocusKey, focused } = useFocusable({ parentFocusKey, trackChildren: true } as any);
   const validEntries = entries.filter(entry => entry.latestVideo);
   return (
-    <div className="category" ref={rowRef}>
+    <section className={`category${focused ? ' focused' : ''}`} ref={rowRef} tabIndex={-1} aria-label={category}>
       <h2 className="category-title">{category}</h2>
       <div className="channel-list">
         {validEntries.length === 0 ? (
@@ -36,7 +36,7 @@ const VideoCategoryRow: React.FC<VideoCategoryRowProps> = ({ category, entries, 
           })
         )}
       </div>
-    </div>
+    </section>
   );
 };
 

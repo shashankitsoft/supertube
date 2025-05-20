@@ -13,25 +13,29 @@ interface ChannelsCategorySectionProps {
 const ChannelsCategorySection: React.FC<ChannelsCategorySectionProps> = ({ category, parentFocusKey, onChannelSelect }) => {
   // Only make the row focusable, not the section
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { ref: rowRef, focusKey: rowFocusKey } = useFocusable({ parentFocusKey, trackChildren: true } as any);
-  return (
-    <div className="category">
+  const { ref: rowRef, focusKey: rowFocusKey, focused } = useFocusable({ parentFocusKey, trackChildren: true } as any);
+  if (!category.channels || category.channels.length === 0) return (
+    <section className={`category${focused ? ' focused' : ''}`} aria-label={category.category} ref={rowRef} tabIndex={-1}>
       <h2 className="category-title">{category.category}</h2>
-      <div className="channel-list" ref={rowRef}>
-        {(!category.channels || category.channels.length === 0) ? (
-          <div className="empty-row" />
-        ) : (
-          category.channels.map((channel, idx) => (
-            <ChannelCard
-              key={idx}
-              channel={channel}
-              onClick={onChannelSelect}
-              parentFocusKey={rowFocusKey}
-            />
-          ))
-        )}
+      <div className="channel-list">
+        <div className="empty-row" />
       </div>
-    </div>
+    </section>
+  );
+  return (
+    <section className={`category${focused ? ' focused' : ''}`} aria-label={category.category} ref={rowRef} tabIndex={-1}>
+      <h2 className="category-title">{category.category}</h2>
+      <div className="channel-list">
+        {category.channels.map((channel, idx) => (
+          <ChannelCard
+            key={idx}
+            channel={channel}
+            onClick={onChannelSelect}
+            parentFocusKey={rowFocusKey}
+          />
+        ))}
+      </div>
+    </section>
   );
 };
 

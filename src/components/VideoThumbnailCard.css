@@ -13,13 +13,14 @@
   margin-left: 4px;
   margin-right: 4px;
 }
-.channel-card-rect:focus, .channel-card-rect:hover {
+.channel-card-rect:focus, .channel-card-rect.focused, .channel-card-rect:hover {
   outline: none;
   border: 2px solid #ff0000;
   box-shadow: 0 0 0 2px #ff000044, 0 4px 16px #000c;
   transform: scale(1.07);
   z-index: 2;
 }
+
 .video-thumb {
   width: 100%;
   height: 190px;

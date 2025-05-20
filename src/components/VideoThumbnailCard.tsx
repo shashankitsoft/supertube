@@ -17,7 +17,7 @@ const VideoThumbnailCard: React.FC<VideoThumbnailCardProps> = ({ video, channelN
     <div
       ref={ref}
       className={`channel-card-rect focusable${focused ? ' focused' : ''}`}
-      tabIndex={0}
+      tabIndex={-1}
       onClick={onClick}
     >
       <img className="video-thumb" src={video.thumbnail || ''} alt={video.title + ' thumbnail'} />

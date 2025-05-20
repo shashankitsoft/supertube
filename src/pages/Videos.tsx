@@ -12,6 +12,7 @@ import VideoCategoryRow from "../components/VideoCategoryRow";
 import "../components/VideoModal.css";
 import { BASE_PATH, REMOTE_BASE_URL } from "../constants";
 import { useFocusable } from "@noriginmedia/norigin-spatial-navigation";
+import { useLocation } from "react-router-dom";
 
 const Videos: React.FC = () => {
   const [videos, setVideos] = useState<VideoEntry[]>([]);
@@ -20,6 +21,16 @@ const Videos: React.FC = () => {
     videoId: string;
     title: string;
   } | null>(null);
+
+  const location = useLocation();
+  const isActiveRoute = location.pathname === "/videos";
+  const { ref: listRef, focusKey: listFocusKey, focusSelf } = useFocusable({ trackChildren: true });
+ console.log('focusKey', listFocusKey, listRef?.current)
+  useEffect(() => {
+    if (isActiveRoute) {
+      focusSelf();
+    }
+  }, [isActiveRoute, focusSelf]);
 
   useEffect(() => {
     fetch(`${REMOTE_BASE_URL}youtube-data.json`)
@@ -37,9 +48,6 @@ const Videos: React.FC = () => {
         return map;
       }, new Map<string, VideoEntry[]>())
   );
-
-  // Top-level focusable container for all categories
-  const { ref: listRef, focusKey: listFocusKey } = useFocusable({ trackChildren: true });
 
   const handleModalKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Escape") setModalOpen(false);
@@ -70,7 +78,7 @@ const Videos: React.FC = () => {
             <IonTitle size="large">Videos</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <div ref={listRef}>
+        <section ref={listRef} className="video-list-section" tabIndex={-1} aria-label="Videos">
           {categories.length === 0 ? (
             <div className="empty-row" />
           ) : (
@@ -84,7 +92,7 @@ const Videos: React.FC = () => {
               />
             ))
           )}
-        </div>
+        </section>
         <VideoModal
           isOpen={modalOpen}
           onDidDismiss={() => setModalOpen(false)}
