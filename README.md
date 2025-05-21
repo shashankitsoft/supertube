@@ -28,7 +28,7 @@ So, today's users need some app which autofilters news or other content category
 - It is also available as android app.apk which can be installed in both Android mobile device as well Google/Android TV for native experience.
 
 ### Tech Stack, Libs & Tools
-- Node: 22.12.0, Npm: 10.9.0, Pnpm: 10.10.0
+- Node: 22.12.0, Npm: 10.9.0, Pnpm: 10.11.0
 - Ionic Framework: 8, with capacitor
 - React: 19.1
 - Typescript: 5.8.3
