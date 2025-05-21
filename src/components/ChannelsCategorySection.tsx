@@ -13,7 +13,7 @@ interface ChannelsCategorySectionProps {
 const ChannelsCategorySection: React.FC<ChannelsCategorySectionProps> = ({ category, parentFocusKey, onChannelSelect }) => {
   // Only make the row focusable, not the section
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { ref: rowRef, focusKey: rowFocusKey, focused } = useFocusable({ parentFocusKey, trackChildren: true } as any);
+  const { ref: rowRef, focusKey: rowFocusKey, focused } = useFocusable({ parentFocusKey, trackChildren: true, autoFocus: true } as any);
   if (!category.channels || category.channels.length === 0) return (
     <section className={`category${focused ? ' focused' : ''}`} aria-label={category.category} ref={rowRef} tabIndex={-1}>
       <h2 className="category-title">{category.category}</h2>

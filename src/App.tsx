@@ -1,12 +1,14 @@
+import React, { useRef } from 'react';
+import { useFocusable } from '@noriginmedia/norigin-spatial-navigation';
 import { Redirect, Route } from 'react-router-dom';
 import {
   IonApp,
-  IonIcon,
-  IonLabel,
   IonRouterOutlet,
   IonTabBar,
-  IonTabButton,
   IonTabs,
+  IonTabButton,
+  IonIcon,
+  IonLabel,
   setupIonicReact
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
@@ -54,25 +56,31 @@ loadYouTubeAPI(() => {});
 
 setupIonicReact();
 
-const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter basename={BASE_PATH}>
-      <IonTabs>
-        <IonRouterOutlet>
-          <Route exact path="/channels">
-            <Channels />
-          </Route>
-          <Route exact path="/news">
-            <News />
-          </Route>
-          <Route exact path="/videos">
-            <Videos />
-          </Route>
-          <Route exact path="/">
-            <Redirect to="/channels" />
-          </Route>
-        </IonRouterOutlet>
-        {/*
+const App: React.FC = () => {
+  // Use Norigin spatial navigation for each tab button
+  const { ref: channelsRef, focused: channelsFocused } = useFocusable({});
+  const { ref: newsRef, focused: newsFocused } = useFocusable({});
+  const { ref: videosRef, focused: videosFocused } = useFocusable({});
+
+  return (
+    <IonApp>
+      <IonReactRouter basename={BASE_PATH}>
+        <IonTabs>
+          <IonRouterOutlet>
+            <Route exact path="/channels">
+              <Channels />
+            </Route>
+            <Route exact path="/news">
+              <News />
+            </Route>
+            <Route exact path="/videos">
+              <Videos />
+            </Route>
+            <Route exact path="/">
+              <Redirect to="/channels" />
+            </Route>
+          </IonRouterOutlet>
+          {/*
           Note for maintainers:
           The tab hrefs below are root-relative (e.g. "/channels").
           React Router's basename (set above) will prepend the correct subpath (e.g. "/supertube/") at navigation time (bcoz of vite-config for github page).
@@ -80,23 +88,24 @@ const App: React.FC = () => (
           but the actual navigation will go to the correct subpath (e.g. "/supertube/channels").
           This is a known limitation of React Router's basename handling and is standard for subpath deployments.
         */}
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="channels" href="/channels" className="tab-btn">
-            <IonIcon aria-hidden="true" icon={logoYoutube} />
-            <IonLabel>Channels</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="news" href="/news" className="tab-btn">
-            <IonIcon aria-hidden="true" icon={newspaper} />
-            <IonLabel>News</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="videos" href="/videos" className="tab-btn">
-            <IonIcon aria-hidden="true" icon={videocam} />
-            <IonLabel>Videos</IonLabel>
-          </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
-    </IonReactRouter>
-  </IonApp>
-);
+          <IonTabBar slot="bottom">
+            <IonTabButton ref={channelsRef} tab="channels" href="/channels" className={channelsFocused ? 'focused' : ''}>
+              <IonIcon aria-hidden="true" icon={logoYoutube} />
+              <IonLabel>Channels</IonLabel>
+            </IonTabButton>
+            <IonTabButton ref={newsRef} tab="news" href="/news" className={newsFocused ? 'focused' : ''}>
+              <IonIcon aria-hidden="true" icon={newspaper} />
+              <IonLabel>News</IonLabel>
+            </IonTabButton>
+            <IonTabButton ref={videosRef} tab="videos" href="/videos" className={videosFocused ? 'focused' : ''}>
+              <IonIcon aria-hidden="true" icon={videocam} />
+              <IonLabel>Videos</IonLabel>
+            </IonTabButton>
+          </IonTabBar>
+        </IonTabs>
+      </IonReactRouter>
+    </IonApp>
+  );
+};
 
 export default App;

@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { IonModal, IonButton, IonIcon } from "@ionic/react";
 import { openInYouTube } from "../utils/youtube";
 import { logoYoutube } from "ionicons/icons";
-import { useFocusable } from '@noriginmedia/norigin-spatial-navigation';
+import { useFocusable, setFocus } from '@noriginmedia/norigin-spatial-navigation';
 import "./VideoModal.css";
 
 interface VideoModalProps {
@@ -20,6 +20,13 @@ const VideoModal: React.FC<VideoModalProps> = ({ isOpen, onDidDismiss, selectedV
   const { ref: ytBtnRef, focused: ytBtnFocused } = useFocusable({ parentFocusKey: modalFocusKey } as any);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { ref: closeBtnRef, focused: closeBtnFocused } = useFocusable({ parentFocusKey: modalFocusKey } as any);
+
+  useEffect(() => {
+    if (isOpen) {
+      setFocus(modalFocusKey);
+    }
+  }, [isOpen, modalFocusKey]);
+
   return (
     <IonModal isOpen={isOpen} onDidDismiss={onDidDismiss}>
       <div

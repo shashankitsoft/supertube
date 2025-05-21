@@ -20,7 +20,7 @@ const NewsSection: React.FC<NewsSectionProps> = ({ title, videos, isLive, onCard
     }))
     .filter(({ video }) => video);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { ref: rowRef, focusKey: rowFocusKey, focused } = useFocusable({ parentFocusKey, trackChildren: true } as any);
+  const { ref: rowRef, focusKey: rowFocusKey, focused } = useFocusable({ parentFocusKey, trackChildren: true, autoFocus: true } as any);
   return (
     <section className={`news-section${focused ? ' focused' : ''}`} aria-label={title}>
       <h2 className="section-title">{title}</h2>
