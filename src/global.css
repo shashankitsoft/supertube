@@ -34,3 +34,20 @@
   box-shadow: 0 0 0 2px #2196f333;
   z-index: 1;
 }
+
+/* Remove tab-btn focus/hover overrides for color, background, border, and box-shadow, since these are now themed via variables.css and Ionic shadow parts. Keep only margin and transition for layout consistency. */
+.tab-btn:focus, .tab-btn.focused, .tab-btn:hover {
+  margin: 0 6px;
+  transition: box-shadow 0.18s, background 0.18s, color 0.18s, border 0.18s, margin 0.18s;
+  z-index: 10;
+}
+
+.tab-btn .ion-label, .tab-btn .ion-icon {
+  color: inherit !important;
+}
+
+.tab-btn {
+  transition: box-shadow 0.18s, background 0.18s, color 0.18s, border 0.18s, margin 0.18s;
+  border: 2.5px solid transparent;
+  margin: 0 6px;
+}

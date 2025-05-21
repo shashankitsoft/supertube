@@ -15,12 +15,19 @@ interface ChannelCardProps {
 const ChannelCard: React.FC<ChannelCardProps> = ({ channel, onClick, parentFocusKey }) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { ref, focused } = useFocusable({ parentFocusKey } as any);
+  // Handle Enter/OK key for TV remote
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter' || e.key === 'OK' || e.keyCode === 13) {
+      onClick(channel);
+    }
+  };
   return (
     <div
       ref={ref}
       className={`channel-square-card focusable${focused ? ' focused' : ''}`}
-      tabIndex={0}
+      tabIndex={-1}
       onClick={() => onClick(channel)}
+      onKeyDown={handleKeyDown}
     >
       <div className="channel-logo-name">
         <img

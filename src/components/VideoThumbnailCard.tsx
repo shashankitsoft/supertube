@@ -13,12 +13,19 @@ interface VideoThumbnailCardProps {
 const VideoThumbnailCard: React.FC<VideoThumbnailCardProps> = ({ video, channelName, onClick, parentFocusKey }) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { ref, focused } = useFocusable({ parentFocusKey } as any);
+  // Handle Enter/OK key for TV remote
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter' || e.key === 'OK' || e.keyCode === 13) {
+      onClick();
+    }
+  };
   return (
     <div
       ref={ref}
       className={`channel-card-rect focusable${focused ? ' focused' : ''}`}
       tabIndex={-1}
       onClick={onClick}
+      onKeyDown={handleKeyDown}
     >
       <img className="video-thumb" src={video.thumbnail || ''} alt={video.title + ' thumbnail'} />
       <div className="video-info">

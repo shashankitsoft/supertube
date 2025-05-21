@@ -81,15 +81,15 @@ const App: React.FC = () => (
           This is a known limitation of React Router's basename handling and is standard for subpath deployments.
         */}
         <IonTabBar slot="bottom">
-          <IonTabButton tab="channels" href="/channels">
+          <IonTabButton tab="channels" href="/channels" className="tab-btn">
             <IonIcon aria-hidden="true" icon={logoYoutube} />
             <IonLabel>Channels</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="news" href="/news">
+          <IonTabButton tab="news" href="/news" className="tab-btn">
             <IonIcon aria-hidden="true" icon={newspaper} />
             <IonLabel>News</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="videos" href="/videos">
+          <IonTabButton tab="videos" href="/videos" className="tab-btn">
             <IonIcon aria-hidden="true" icon={videocam} />
             <IonLabel>Videos</IonLabel>
           </IonTabButton>
